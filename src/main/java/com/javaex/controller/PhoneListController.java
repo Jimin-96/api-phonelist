@@ -22,6 +22,5 @@ public class PhoneListController {
 		System.out.println(pList);
 
 		return pList;
-		
 	}
 }
