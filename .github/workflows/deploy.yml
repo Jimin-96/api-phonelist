@@ -30,7 +30,7 @@ jobs:
       - name: Build and push Docker image for multiple platforms
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t jimin96/mysite:latest --push . 
+          docker buildx build --platform linux/amd64,linux/arm64 -t jimin96/phhonebook:latest --push . 
          
   SSH: 
     needs: build-and-deploy
@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             sudo mkdir -p /home/ec2-user/upload
-            sudo docker pull jimin96/mysite:latest 
+            sudo docker pull jimin96/phhonebook:latest 
             sudo docker stop mysite || true
             sudo docker rm mysite || true
-            sudo docker run -d --name mysite -p 9000:9000 -v /home/ec2-user/upload:/app/upload jimin96/mysite:latest
+            sudo docker run -d --name phhonebook -p 9000:9000 -v /home/ec2-user/upload:/app/upload jimin96/phhonebook:latest
