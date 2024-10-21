@@ -1,4 +1,4 @@
-name: Deploy mysite App
+name: Deploy phonelist App
 
 on: 
   push: 
@@ -30,7 +30,7 @@ jobs:
       - name: Build and push Docker image for multiple platforms
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t jimin96/phhonebook:latest --push . 
+          docker buildx build --platform linux/amd64,linux/arm64 -t jimin96/phonelist:latest --push . 
          
   SSH: 
     needs: build-and-deploy
@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             sudo mkdir -p /home/ec2-user/upload
-            sudo docker pull jimin96/phhonebook:latest 
-            sudo docker stop mysite || true
-            sudo docker rm mysite || true
-            sudo docker run -d --name phhonebook -p 9000:9000 -v /home/ec2-user/upload:/app/upload jimin96/phhonebook:latest
+            sudo docker pull jimin96/phonelist:latest 
+            sudo docker stop phonelist || true
+            sudo docker rm phonelist || true
+            sudo docker run -d --name phonelist -p 9000:9000 -v /home/ec2-user/upload:/app/upload jimin96/phonelist:latest
