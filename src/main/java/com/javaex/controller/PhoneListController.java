@@ -21,6 +21,7 @@ public class PhoneListController {
 		List<PhoneListVo> pList = service.exeGetList();
 		System.out.println(pList);
 
+		
 		return pList;
 		
 	}
